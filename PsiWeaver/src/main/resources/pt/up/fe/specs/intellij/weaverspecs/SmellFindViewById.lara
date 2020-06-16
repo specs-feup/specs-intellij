@@ -1,0 +1,17 @@
+import weaver.Weaver;
+
+aspectdef FVBI
+
+    var message = "";
+
+	//Select calls inside methods
+	select class.method.call end
+	apply
+	    if($call.name === "findViewById") {
+	        message += 'Warning! The method ' + $class.name + "." + $method.name + ' is calling the method: ' + $call.name + ' (line ' + $call.line + ') which is energy inefficient \n \t We recommend the usage of ViewHolder design  pattern.\n';
+	    }
+	end
+	
+	Weaver.getWeaverEngine().getUserData().setRaw("Message", message);
+
+end

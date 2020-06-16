@@ -1,0 +1,26 @@
+import lara.util.StringSet;
+import lara.JavaInterop;
+
+import weaver.Weaver;
+
+
+aspectdef privategetset
+
+    var gets = [];
+    var sets = [];
+
+	//Select calls inside methods
+	select class.method.call end
+	apply
+        if($call.name.startsWith('get')) {
+            gets.push($call.psiElement);
+		}
+		else if($call.name.startsWith('set')) {
+		    sets.push($call.psiElement);
+	    }
+	end
+
+	Weaver.getWeaverEngine().getUserData().setRaw("getCalls", JavaInterop.arrayToList(gets));
+	Weaver.getWeaverEngine().getUserData().setRaw("setCalls", JavaInterop.arrayToList(sets));
+
+end

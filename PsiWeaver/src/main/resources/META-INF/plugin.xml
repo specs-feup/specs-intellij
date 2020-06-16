@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>pt.up.fe.specs.intellij.psiweaver</id>
+    <name>PsiWeaver</name>
+    <vendor>SPeCS Lab</vendor>
+
+    <description>
+        Adds support for executing LARA scripts (http://specs.fe.up.pt/tools/lara) over IntelliJ's internal representation (PsiElement nodes).
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <!-- Add your actions here -->
+    <!--<action id="actiona" class="actiona" text="Action" description="Action"> -->
+    <!--
+    <actions>
+
+
+
+        <action id="actiona" class="myplugin.AnAction" text="Action" description="Action">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
+    -->
+</idea-plugin>
