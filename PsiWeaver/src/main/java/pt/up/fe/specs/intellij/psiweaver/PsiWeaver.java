@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.io.File;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 import org.suikasoft.jOptions.Interfaces.DataStore;
 import org.lara.interpreter.weaver.interf.JoinPoint;
@@ -40,6 +41,41 @@ public class PsiWeaver extends APsiWeaver {
         this.userData = DataStore.newInstance("PsiWeaver User Data");
     }
 
+    public static DataStore run(PsiFile rootFile, String laraAspect) {
+        File tempFolder = SpecsIo.getTempFolder("psiweaver");
+        File aspectFile = new File(tempFolder, UUID.randomUUID().toString() + ".lara");
+        SpecsIo.write(aspectFile, laraAspect);
+        SpecsLogs.debug(() -> "Wrote temporary lara file '"+aspectFile.getAbsolutePath()+"'");
+
+        return run(rootFile, aspectFile);
+    }
+
+
+    public static DataStore run(PsiFile rootFile, File laraAspect) {
+        Callable<DataStore> runnable = () ->  PsiWeaver.runAspect(rootFile, laraAspect);
+        return launch(runnable);
+    }
+
+    private static DataStore launch(Callable<DataStore> runnable) {
+        Thread t = Thread.currentThread();
+        ClassLoader previousClassLoader = t.getContextClassLoader();
+        var newClassloader = SpecsIo.class.getClassLoader();
+        SpecsLogs.debug(() -> "Unloading classloader " + previousClassLoader);
+        SpecsLogs.debug(() -> "Using classloader " + newClassloader);
+        SpecsLogs.debug(() -> "Parent classloader " + newClassloader.getParent());
+        t.setContextClassLoader(newClassloader);
+
+        try {
+            return runnable.call();
+        } catch (Exception e) {
+            SpecsLogs.debug(() -> "Exception while calling weaver: " + e);
+            e.printStackTrace();
+        } finally {
+            t.setContextClassLoader(previousClassLoader);
+        }
+
+        return null;
+    }
 
     public static DataStore runAspect(PsiFile rootFile, String laraAspect) {
         File tempFolder = SpecsIo.getTempFolder("psiweaver");
