@@ -1,51 +1,36 @@
 package pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints;
 
-import org.lara.interpreter.weaver.interf.events.Stage;
-import java.util.Optional;
-import org.lara.interpreter.exception.AttributeException;
 import org.lara.interpreter.weaver.interf.JoinPoint;
+import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 
 /**
- * Auto-Generated class for join point ACall
+ * Auto-Generated class for join point ANewExpr
  * This class is overwritten by the Weaver Generator.
  * 
- * Represents the call of a Java method or constructor
+ * Represents the call of a Java class constructor
  * @author Lara Weaver Generator
  */
-public abstract class ACall extends AExpression {
+public abstract class ANewExpr extends ACall {
 
-    protected AExpression aExpression;
+    protected ACall aCall;
 
     /**
      * 
      */
-    public ACall(AExpression aExpression){
-        this.aExpression = aExpression;
+    public ANewExpr(ACall aCall){
+        super(aCall);
+        this.aCall = aCall;
     }
     /**
-     * the name of the method being called
+     * Get value on attribute name
+     * @return the attribute's value
      */
-    public abstract String getNameImpl();
-
-    /**
-     * the name of the method being called
-     */
-    public final Object getName() {
-        try {
-        	if(hasListeners()) {
-        		eventTrigger().triggerAttribute(Stage.BEGIN, this, "name", Optional.empty());
-        	}
-        	String result = this.getNameImpl();
-        	if(hasListeners()) {
-        		eventTrigger().triggerAttribute(Stage.END, this, "name", Optional.ofNullable(result));
-        	}
-        	return result!=null?result:getUndefinedValue();
-        } catch(Exception e) {
-        	throw new AttributeException(get_class(), "name", e);
-        }
+    @Override
+    public String getNameImpl() {
+        return this.aCall.getNameImpl();
     }
 
     /**
@@ -54,7 +39,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public String getTypeImpl() {
-        return this.aExpression.getTypeImpl();
+        return this.aCall.getTypeImpl();
     }
 
     /**
@@ -63,7 +48,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint insertBeforeImpl(AJoinPoint node) {
-        return this.aExpression.insertBeforeImpl(node);
+        return this.aCall.insertBeforeImpl(node);
     }
 
     /**
@@ -72,7 +57,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint insertBeforeImpl(String code) {
-        return this.aExpression.insertBeforeImpl(code);
+        return this.aCall.insertBeforeImpl(code);
     }
 
     /**
@@ -81,7 +66,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint insertAfterImpl(AJoinPoint node) {
-        return this.aExpression.insertAfterImpl(node);
+        return this.aCall.insertAfterImpl(node);
     }
 
     /**
@@ -90,7 +75,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint insertAfterImpl(String code) {
-        return this.aExpression.insertAfterImpl(code);
+        return this.aCall.insertAfterImpl(code);
     }
 
     /**
@@ -99,7 +84,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint insertReplaceImpl(AJoinPoint jp) {
-        return this.aExpression.insertReplaceImpl(jp);
+        return this.aCall.insertReplaceImpl(jp);
     }
 
     /**
@@ -108,7 +93,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint insertReplaceImpl(String code) {
-        return this.aExpression.insertReplaceImpl(code);
+        return this.aCall.insertReplaceImpl(code);
     }
 
     /**
@@ -116,7 +101,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint copyImpl() {
-        return this.aExpression.copyImpl();
+        return this.aCall.copyImpl();
     }
 
     /**
@@ -124,7 +109,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public void removeImpl() {
-        this.aExpression.removeImpl();
+        this.aCall.removeImpl();
     }
 
     /**
@@ -134,7 +119,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint[] insertImpl(String position, String code) {
-        return this.aExpression.insertImpl(position, code);
+        return this.aCall.insertImpl(position, code);
     }
 
     /**
@@ -144,7 +129,7 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public AJoinPoint[] insertImpl(String position, JoinPoint code) {
-        return this.aExpression.insertImpl(position, code);
+        return this.aCall.insertImpl(position, code);
     }
 
     /**
@@ -152,26 +137,26 @@ public abstract class ACall extends AExpression {
      */
     @Override
     public String toString() {
-        return this.aExpression.toString();
+        return this.aCall.toString();
     }
 
     /**
      * 
      */
     @Override
-    public Optional<? extends AExpression> getSuper() {
-        return Optional.of(this.aExpression);
+    public Optional<? extends ACall> getSuper() {
+        return Optional.of(this.aCall);
     }
 
     /**
      * 
      */
     @Override
-    public List<? extends JoinPoint> select(String selectName) {
+    public final List<? extends JoinPoint> select(String selectName) {
         List<? extends JoinPoint> joinPointList;
         switch(selectName) {
         	default:
-        		joinPointList = this.aExpression.select(selectName);
+        		joinPointList = this.aCall.select(selectName);
         		break;
         }
         return joinPointList;
@@ -181,7 +166,7 @@ public abstract class ACall extends AExpression {
      * 
      */
     @Override
-    public void defImpl(String attribute, Object value) {
+    public final void defImpl(String attribute, Object value) {
         switch(attribute){
         default: throw new UnsupportedOperationException("Join point "+get_class()+": attribute '"+attribute+"' cannot be defined");
         }
@@ -191,25 +176,24 @@ public abstract class ACall extends AExpression {
      * 
      */
     @Override
-    protected void fillWithAttributes(List<String> attributes) {
-        this.aExpression.fillWithAttributes(attributes);
-        attributes.add("name");
+    protected final void fillWithAttributes(List<String> attributes) {
+        this.aCall.fillWithAttributes(attributes);
     }
 
     /**
      * 
      */
     @Override
-    protected void fillWithSelects(List<String> selects) {
-        this.aExpression.fillWithSelects(selects);
+    protected final void fillWithSelects(List<String> selects) {
+        this.aCall.fillWithSelects(selects);
     }
 
     /**
      * 
      */
     @Override
-    protected void fillWithActions(List<String> actions) {
-        this.aExpression.fillWithActions(actions);
+    protected final void fillWithActions(List<String> actions) {
+        this.aCall.fillWithActions(actions);
     }
 
     /**
@@ -217,8 +201,8 @@ public abstract class ACall extends AExpression {
      * @return The join point type
      */
     @Override
-    public String get_class() {
-        return "call";
+    public final String get_class() {
+        return "newExpr";
     }
 
     /**
@@ -226,17 +210,17 @@ public abstract class ACall extends AExpression {
      * @return True if this join point is an instanceof the given class
      */
     @Override
-    public boolean instanceOf(String joinpointClass) {
+    public final boolean instanceOf(String joinpointClass) {
         boolean isInstance = get_class().equals(joinpointClass);
         if(isInstance) {
         	return true;
         }
-        return this.aExpression.instanceOf(joinpointClass);
+        return this.aCall.instanceOf(joinpointClass);
     }
     /**
      * 
      */
-    protected enum CallAttributes {
+    protected enum NewExprAttributes {
         NAME("name"),
         TYPE("type"),
         PSIELEMENT("psiElement"),
@@ -250,13 +234,13 @@ public abstract class ACall extends AExpression {
         /**
          * 
          */
-        private CallAttributes(String name){
+        private NewExprAttributes(String name){
             this.name = name;
         }
         /**
          * Return an attribute enumeration item from a given attribute name
          */
-        public static Optional<CallAttributes> fromString(String name) {
+        public static Optional<NewExprAttributes> fromString(String name) {
             return Arrays.asList(values()).stream().filter(attr -> attr.name.equals(name)).findAny();
         }
 
@@ -264,7 +248,7 @@ public abstract class ACall extends AExpression {
          * Return a list of attributes in String format
          */
         public static List<String> getNames() {
-            return Arrays.asList(values()).stream().map(CallAttributes::name).collect(Collectors.toList());
+            return Arrays.asList(values()).stream().map(NewExprAttributes::name).collect(Collectors.toList());
         }
 
         /**

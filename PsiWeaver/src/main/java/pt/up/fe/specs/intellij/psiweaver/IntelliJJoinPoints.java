@@ -1,14 +1,11 @@
 package pt.up.fe.specs.intellij.psiweaver;
 
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.*;
 import com.intellij.psi.impl.compiled.ClsMethodImpl;
 import com.intellij.psi.impl.source.PsiClassImpl;
 import com.intellij.psi.impl.source.PsiFieldImpl;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
 import com.intellij.psi.impl.source.PsiMethodImpl;
-import com.intellij.psi.impl.source.tree.java.PsiMethodCallExpressionImpl;
 import pt.up.fe.specs.intellij.psiweaver.abstracts.APsiWeaverJoinPoint;
 import pt.up.fe.specs.intellij.psiweaver.joinpoints.*;
 import pt.up.fe.specs.intellij.util.IntelliJNodes;
@@ -25,7 +22,10 @@ public class IntelliJJoinPoints {
         JOINPOINT_FACTORY.put(PsiFieldImpl.class, IntelliJField::new);
         JOINPOINT_FACTORY.put(PsiMethodImpl.class, IntelliJMethod::new);
         JOINPOINT_FACTORY.put(ClsMethodImpl.class, IntelliJMethod::new);
-        JOINPOINT_FACTORY.put(PsiMethodCallExpressionImpl.class, IntelliJCall::new);
+        //JOINPOINT_FACTORY.put(PsiMethodCallExpressionImpl.class, IntelliJCall::new);
+        JOINPOINT_FACTORY.put(PsiNewExpression.class, IntelliJNewExpr::new);
+        JOINPOINT_FACTORY.put(PsiCallExpression.class, IntelliJCall::new);
+        JOINPOINT_FACTORY.put(PsiExpression.class, IntelliJExpression::new);
     }
 
     public static <T extends APsiWeaverJoinPoint> T create(PsiElement node, Class<T> expectedClass) {

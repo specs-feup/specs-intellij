@@ -5,7 +5,13 @@
 
     <description>
         Adds support for executing LARA scripts (http://specs.fe.up.pt/tools/lara) over IntelliJ's internal representation (PsiElement nodes).
+
+        This plugin does not have UI, it is to be used as a dependency for other plugins.
     </description>
+
+    <change-notes>
+        First version of the plugin, can select a couple of points (file, class, field, method, call).
+    </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
@@ -13,6 +19,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
+
 
     <!-- Add your actions here -->
     <!--<action id="actiona" class="actiona" text="Action" description="Action"> -->

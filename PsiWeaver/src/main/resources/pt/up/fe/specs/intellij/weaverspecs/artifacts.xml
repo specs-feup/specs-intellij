@@ -68,6 +68,21 @@
 		<attribute name="name"			type="String" tooltip="the name of the method being called"/>
 	</artifact>
 
+	<!-- EXPRESSION -->
+	<artifact class="expression">
+		<attribute name="type"			type="String" tooltip="the type of this expression"/>
+	</artifact>
+
+	<!-- NEW -->
+	<artifact class="new">
+	</artifact>
+
+	<!-- TYPE -->
+	<!--
+	<artifact class="type">
+	</artifact>
+-->
+
 	<!-- CLASS -->
 	<!--
 	<artifact class="class" default="name">

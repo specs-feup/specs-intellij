@@ -6,23 +6,22 @@ import org.lara.language.specification.LanguageSpecification;
 import org.lara.language.specification.dsl.LanguageSpecificationV2;
 import pt.up.fe.specs.intellij.psiweaver.abstracts.weaver.APsiWeaver;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.io.File;
-import java.util.UUID;
 import java.util.concurrent.Callable;
 
 import org.suikasoft.jOptions.Interfaces.DataStore;
 import org.lara.interpreter.weaver.interf.JoinPoint;
 import org.lara.interpreter.weaver.interf.AGear;
 import pt.up.fe.specs.intellij.psiweaver.joinpoints.IntelliJFile;
+import pt.up.fe.specs.intellij.psiweaver.lara.WeaverLaraResource;
 import pt.up.fe.specs.lara.WeaverLauncher;
 import pt.up.fe.specs.util.SpecsIo;
 import pt.up.fe.specs.util.SpecsLogs;
 import pt.up.fe.specs.util.SpecsSystem;
 
 import pt.up.fe.specs.lara.langspec.LangSpecsXmlParser;
+import pt.up.fe.specs.util.providers.ResourceProvider;
 
 
 /**
@@ -32,6 +31,11 @@ import pt.up.fe.specs.lara.langspec.LangSpecsXmlParser;
  * @author Lara Weaver Generator
  */
 public class PsiWeaver extends APsiWeaver {
+
+    private static final List<ResourceProvider> INTELLIJ_LARA_API = new ArrayList<>();
+    static {
+        INTELLIJ_LARA_API.addAll(ResourceProvider.getResourcesFromEnum(WeaverLaraResource.class));
+    }
 
     private final PsiFile rootFile;
     private final DataStore userData;
@@ -228,5 +232,10 @@ public class PsiWeaver extends APsiWeaver {
     protected LanguageSpecificationV2 buildLangSpecsV2() {
         return LangSpecsXmlParser.parse(() -> "pt/up/fe/specs/intellij/weaverspecs/joinPointModel.xml", () -> "pt/up/fe/specs/intellij/weaverspecs/artifacts.xml",
                 () -> "pt/up/fe/specs/intellij/weaverspecs/actionModel.xml", true);
+    }
+
+    @Override
+    public List<ResourceProvider> getAspectsAPI() {
+        return INTELLIJ_LARA_API;
     }
 }

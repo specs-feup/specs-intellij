@@ -1,6 +1,7 @@
 package pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints;
 
 import java.util.List;
+import org.lara.interpreter.weaver.interf.SelectOp;
 import org.lara.interpreter.weaver.interf.JoinPoint;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ import java.util.Arrays;
  * Auto-Generated class for join point AClass
  * This class is overwritten by the Weaver Generator.
  * 
- * join point representation of a class
+ * Represents a Java class
  * @author Lara Weaver Generator
  */
 public abstract class AClass extends AObjectType {
@@ -23,6 +24,30 @@ public abstract class AClass extends AObjectType {
     public AClass(AObjectType aObjectType){
         this.aObjectType = aObjectType;
     }
+    /**
+     * Default implementation of the method used by the lara interpreter to select expressions
+     * @return 
+     */
+    public List<? extends AExpression> selectExpression() {
+        return select(pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints.AExpression.class, SelectOp.DESCENDANTS);
+    }
+
+    /**
+     * Default implementation of the method used by the lara interpreter to select calls
+     * @return 
+     */
+    public List<? extends ACall> selectCall() {
+        return select(pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints.ACall.class, SelectOp.DESCENDANTS);
+    }
+
+    /**
+     * Default implementation of the method used by the lara interpreter to select newExprs
+     * @return 
+     */
+    public List<? extends ANewExpr> selectNewExpr() {
+        return select(pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints.ANewExpr.class, SelectOp.DESCENDANTS);
+    }
+
     /**
      * Get value on attribute name
      * @return the attribute's value
@@ -181,6 +206,15 @@ public abstract class AClass extends AObjectType {
     public final List<? extends JoinPoint> select(String selectName) {
         List<? extends JoinPoint> joinPointList;
         switch(selectName) {
+        	case "expression": 
+        		joinPointList = selectExpression();
+        		break;
+        	case "call": 
+        		joinPointList = selectCall();
+        		break;
+        	case "newExpr": 
+        		joinPointList = selectNewExpr();
+        		break;
         	case "field": 
         		joinPointList = selectField();
         		break;
@@ -218,6 +252,9 @@ public abstract class AClass extends AObjectType {
     @Override
     protected final void fillWithSelects(List<String> selects) {
         this.aObjectType.fillWithSelects(selects);
+        selects.add("expression");
+        selects.add("call");
+        selects.add("newExpr");
     }
 
     /**

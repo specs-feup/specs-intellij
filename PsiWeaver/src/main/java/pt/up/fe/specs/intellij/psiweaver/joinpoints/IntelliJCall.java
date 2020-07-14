@@ -1,6 +1,7 @@
 package pt.up.fe.specs.intellij.psiweaver.joinpoints;
 
 import com.intellij.psi.PsiCall;
+import com.intellij.psi.PsiCallExpression;
 import com.intellij.psi.PsiElement;
 import pt.up.fe.specs.intellij.psiweaver.IntelliJJoinPoints;
 import pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints.ACall;
@@ -8,9 +9,10 @@ import pt.up.fe.specs.intellij.util.IntelliJNodes;
 
 public class IntelliJCall extends ACall {
 
-    private final PsiCall call;
+    private final PsiCallExpression call;
 
-    public IntelliJCall(PsiCall call) {
+    public IntelliJCall(PsiCallExpression call) {
+        super(new IntelliJExpression(call));
         this.call = call;
     }
 

@@ -24,10 +24,34 @@
 	
 		
 	<!-- CLASS -->
-	<joinpoint class="class" tooltip="join point representation of a class" extends="objectType">
+	<joinpoint class="class" tooltip="Represents a Java class" extends="objectType">
 		<!--<select 					class="constructor" tooltip="the class constructors"/> -->
+
+		<!-- These selects are temporary, they should be inside a scope -->
+		<select							class="expression"/>
+		<select							class="call"/>
+		<select							class="newExpr"/>
 	</joinpoint>
 
+
+
+	<!-- EXPRESSION -->
+	<joinpoint class="expression" tooltip="Represents a Java expression">
+	</joinpoint>
+
+	<!-- CALL -->
+	<joinpoint class="call" tooltip="Represents the call of a Java method or constructor" extends="expression">
+	</joinpoint>
+
+	<!-- NEW EXPR -->
+	<joinpoint class="newExpr" tooltip="Represents the call of a Java class constructor" extends="call">
+	</joinpoint>
+
+	<!-- TYPE -->
+	<!--
+	<joinpoint class="type" tooltip="Representation of Java type (primitive type, array or class type)">
+	</joinpoint>
+	-->
 
 	<!-- INTERFACE -->
 	<!--
@@ -55,8 +79,7 @@
 		<!--<select alias="param" 		class="declaration"/>-->
 	</joinpoint>
 
-	<joinpoint class="call">
-	</joinpoint>
+
 	
 	<!-- CONSTRUCTOR -->
 	<!--

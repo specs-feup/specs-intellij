@@ -3,6 +3,7 @@ package pt.up.fe.specs.intellij.psiweaver.joinpoints;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import pt.up.fe.specs.intellij.psiweaver.abstracts.joinpoints.AField;
+import pt.up.fe.specs.intellij.util.CodeUtils;
 import pt.up.fe.specs.intellij.util.IntelliJNodes;
 
 import java.util.function.Supplier;
@@ -22,6 +23,7 @@ public class IntelliJField extends AField {
 
     @Override
     public String getTypeImpl() {
+ /*
         Supplier<String> action = () -> {
 //            System.out.println("PSY TYPE: " + field.getType());
 //            System.out.println("PSY TYPE ELEMENT: " + field.getTypeElement());
@@ -37,5 +39,13 @@ public class IntelliJField extends AField {
         };
 
         return IntelliJNodes.read(action);
+*/
+        Supplier<String> getTypeText = () -> {
+//            System.out.println("PSY TYPE: " + field.getType());
+//            System.out.println("PSY TYPE ELEMENT: " + field.getTypeElement());
+            return field.getTypeElement().getText();
+        };
+
+        return CodeUtils.removeGenerics(IntelliJNodes.read(getTypeText));
     }
 }
