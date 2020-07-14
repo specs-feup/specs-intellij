@@ -12,6 +12,7 @@ import org.graalvm.polyglot.HostAccess;
 import org.jetbrains.annotations.NotNull;
 import org.suikasoft.jOptions.Interfaces.DataStore;
 import pt.up.fe.specs.intellij.psiweaver.PsiWeaver;
+import pt.up.fe.specs.intellij.util.IntelliJNodes;
 import pt.up.fe.specs.util.SpecsIo;
 import pt.up.fe.specs.util.providers.ResourceProvider;
 import runnable.MyRunnable;
@@ -44,13 +45,14 @@ public class AnAction extends com.intellij.openapi.actionSystem.AnAction {
 
             System.out.println("Before LARA");
 
-
+        System.out.println("Tree:\n"+IntelliJNodes.toTree(rootFile));
 
 //        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/Test.lara";
 //        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/hashmap.lara";
-        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/private.lara";
+//        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/private.lara";
 //        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/SmellFindViewById.lara";
 //        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/wakelock.lara";
+        ResourceProvider testLara = () -> "pt/up/fe/specs/intellij/weaverspecs/NewHashMap.lara";
 
         Callable<DataStore> runnable = () ->  PsiWeaver.runAspect(rootFile, testLara.read());
         DataStore results = launch(runnable);

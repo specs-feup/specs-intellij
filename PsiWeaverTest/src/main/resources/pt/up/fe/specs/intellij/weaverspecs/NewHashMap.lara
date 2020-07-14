@@ -1,0 +1,25 @@
+import weaver.Weaver;
+import lara.JavaInterop;
+
+
+aspectdef NewHashMap
+
+    var types = [];
+
+    select newExpr end
+    apply
+        println("NEw: " + $newExpr.code);
+        println("NEw type: " + $newExpr.type);
+        types.push($newExpr.type);
+    end
+/*
+    for(var $new of Query.search("new").get()) {
+       // println("NEw: " + $new.code);
+        //println("NEw type: " + $new.type);
+        types.push($new.type);
+    }
+*/
+    Weaver.getWeaverEngine().getUserData().setRaw("types", JavaInterop.arrayToList(types));
+
+
+end
