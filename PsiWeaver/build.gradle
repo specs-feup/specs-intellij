@@ -3,12 +3,14 @@ plugins {
     id 'org.jetbrains.intellij' version '0.4.18'
 }
 
+/*
 intellij {
     plugins 'java'
 }
+*/
 
 group 'org.example'
-version '1.0.1-SNAPSHOT'
+version '1.0.2-SNAPSHOT'
 
 sourceCompatibility =  11
 
@@ -24,6 +26,7 @@ dependencies {
 
     // This should be temporary, while Nashorn engine is not supported in IntelliJ
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation fileTree(dir: 'libs-lara', include: ['*.jar'])	
 
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
     //compile group: 'pt.up.fe.specs', name: 'lara-framework', version: '202003061350'
@@ -32,7 +35,7 @@ dependencies {
 
 //    compile group: 'org.graalvm.truffle', name: 'truffle-api', version: '20.0.0'
 
-    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.0-M4'
+    //compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.0-M4'
 
 
 
@@ -55,6 +58,7 @@ dependencies {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version '2019.3'
+    plugins = ['java']
 }
 
 
