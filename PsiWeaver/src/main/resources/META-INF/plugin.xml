@@ -10,7 +10,7 @@
     </description>
 
     <change-notes>
-        First version of the plugin, can select a couple of points (file, class, field, method, call).
+        Identical to previous version, update process failed.
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
